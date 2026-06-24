@@ -91,10 +91,14 @@ class Tree {
     return node;
   }
 
-  levelOrderForEach(callback) {
+  #isFunction(func) {
     if (typeof callback !== "function") {
       throw new Error("You must provide a callback function.");
     }
+  }
+
+  levelOrderForEach(callback) {
+    this.#isFunction(callback);
 
     const queue = [];
 
