@@ -38,19 +38,26 @@ class Tree {
     }
   }
 
-  insert(value, node = this.root, previousNode = null) {
-    if (node === null) return false;
+  insert(value) {
+    if (this.includes(value)) {
+      console.log("Value already exists in the tree");
+      return;
+    }
 
-    if (node.data === value) return "Value already exists in tree";
+    this.root = this.#insertHelper(value);
+  }
 
-    if (
-      (previousNode === null || value < previousNode.data) &&
-      (value > node.data || node.left === null)
-    ) {
-      const newNode = new Node(value);
-      newNode.left = node;
-      previousNode.left = newNode;
-      return `Value: ${value} inserted in to tree`;
+  #insertHelper(value, node = this.root) {
+    if (node === null) return new Node(value);
+
+    if (value < node.data) {
+      node.left = this.#insertHelper(value, node.left);
+    } else {
+      node.right = this.#insertHelper(value, node.right);
+    }
+    return node;
+  }
+
     }
 
     previousNode = node;
