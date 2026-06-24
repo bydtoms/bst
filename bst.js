@@ -58,16 +58,39 @@ class Tree {
     return node;
   }
 
+  #getSuccessor(curr) {
+    curr = curr.right;
+    while (curr !== null && curr.left !== null) {
+      curr = curr.left;
+    }
+    return curr;
+  }
+
+  deleteItem(value, node = this.root) {
+    if (node === null) {
+      return node;
     }
 
-    previousNode = node;
-
-    if (node.data > value && node.left !== null) {
-      return this.insert(value, node.left, previousNode);
-    } else if (node.data < value && node.right !== null) {
-      return this.insert(value, node.right, previousNode);
+    if (value > node.data) {
+      node.right = this.deleteItem(value, node.right);
+    } else if (value < node.data) {
+      node.left = this.deleteItem(value, node.left);
     } else {
-      return false;
+      if (node.left === null) {
+        return node.right;
+      }
+
+      if (node.right === null) {
+        return node.left;
+      }
+
+      const successor = this.#getSuccessor(node);
+      node.data = successor.data;
+      node.right = this.deleteItem(node.right, successor.data);
+    }
+    return node;
+  }
+
     }
   }
 }
