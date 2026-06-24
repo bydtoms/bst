@@ -92,7 +92,7 @@ class Tree {
   }
 
   #isFunction(func) {
-    if (typeof callback !== "function") {
+    if (typeof func !== "function") {
       throw new Error("You must provide a callback function.");
     }
   }
