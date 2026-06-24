@@ -126,6 +126,26 @@ class Tree {
     this.preOrderForEach(callback, node.left);
     this.preOrderForEach(callback, node.right);
   }
+
+  inOrderForEach(callback, node = this.root) {
+    this.#isFunction(callback);
+
+    if (node === null) return;
+
+    this.inOrderForEach(callback, node.left);
+    callback(node.data);
+    this.inOrderForEach(callback, node.right);
+  }
+
+  postOrderForEach(callback, node = this.root) {
+    this.#isFunction(callback);
+
+    if (node === null) return;
+
+    this.postOrderForEach(callback, node.left);
+    this.postOrderForEach(callback, node.right);
+    callback(node.data);
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -137,3 +157,17 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
   console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
   prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
 };
+
+const tree = new Tree([1, 2, 3, 4, 5]);
+prettyPrint(tree.root);
+tree.preOrderForEach((item) => {
+  console.log(item);
+});
+console.log("======");
+tree.inOrderForEach((item) => {
+  console.log(item);
+});
+console.log("======");
+tree.postOrderForEach((item) => {
+  console.log(item);
+});
