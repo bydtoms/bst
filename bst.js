@@ -169,17 +169,3 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
   console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
   prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
 };
-
-const tree = new Tree([1, 2, 3, 4, 5]);
-prettyPrint(tree.root);
-tree.preOrderForEach((item) => {
-  console.log(item);
-});
-console.log("======");
-tree.inOrderForEach((item) => {
-  console.log(item);
-});
-console.log("======");
-tree.postOrderForEach((item) => {
-  console.log(item);
-});
