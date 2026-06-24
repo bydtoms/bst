@@ -116,6 +116,16 @@ class Tree {
       }
     }
   }
+
+  preOrderForEach(callback, node = this.root) {
+    this.#isFunction(callback);
+
+    if (node === null) return;
+
+    callback(node.data);
+    this.preOrderForEach(callback, node.left);
+    this.preOrderForEach(callback, node.right);
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
