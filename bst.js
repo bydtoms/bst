@@ -123,12 +123,3 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
   console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
   prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
 };
-
-const exampleTree = new Tree([
-  1, 7, 4, 23, 2, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324,
-]);
-prettyPrint(exampleTree.root);
-const tree = new Tree([7, 4, 23, 2, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-prettyPrint(tree.root);
-console.log(tree.insert(1));
-prettyPrint(tree.root);
