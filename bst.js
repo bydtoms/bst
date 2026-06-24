@@ -117,33 +117,45 @@ class Tree {
     }
   }
 
-  preOrderForEach(callback, node = this.root) {
+  preOrderForEach(callback) {
     this.#isFunction(callback);
 
+    this.#preOrderForEachHelper(callback, this.root);
+  }
+
+  #preOrderForEachHelper(callback, node) {
     if (node === null) return;
 
     callback(node.data);
-    this.preOrderForEach(callback, node.left);
-    this.preOrderForEach(callback, node.right);
+    this.#preOrderForEachHelper(callback, node.left);
+    this.#preOrderForEachHelper(callback, node.right);
   }
 
-  inOrderForEach(callback, node = this.root) {
+  inOrderForEach(callback) {
     this.#isFunction(callback);
 
+    this.#inOrderForEachHelper(callback, this.root);
+  }
+
+  #inOrderForEachHelper(callback, node) {
     if (node === null) return;
 
-    this.inOrderForEach(callback, node.left);
+    this.#inOrderForEachHelper(callback, node.left);
     callback(node.data);
-    this.inOrderForEach(callback, node.right);
+    this.#inOrderForEachHelper(callback, node.right);
   }
 
-  postOrderForEach(callback, node = this.root) {
+  postOrderForEach(callback) {
     this.#isFunction(callback);
 
+    this.#postOrderForEachHelper(callback, this.root);
+  }
+
+  #postOrderForEachHelper(callback, node) {
     if (node === null) return;
 
-    this.postOrderForEach(callback, node.left);
-    this.postOrderForEach(callback, node.right);
+    this.#postOrderForEachHelper(callback, node.left);
+    this.#postOrderForEachHelper(callback, node.right);
     callback(node.data);
   }
 }
