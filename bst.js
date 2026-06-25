@@ -158,6 +158,18 @@ class Tree {
     this.#postOrderForEachHelper(callback, node.right);
     callback(node.data);
   }
+
+  height(value, level = 1, node = this.root) {
+    if (node === null) return undefined;
+
+    if (value === node.data) return level;
+
+    if (value < node.data) return this.height(value, level + 1, node.left);
+    if (value > node.data) return this.height(value, level + 1, node.right);
+    return level;
+  }
+
+  #heightHelper() {}
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
