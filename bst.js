@@ -168,6 +168,30 @@ class Tree {
     if (value > node.data) return this.height(value, level + 1, node.right);
     return level;
   }
+
+  height(value) {
+    const node = this.#getNodeFromValue(value);
+
+    return this.#getHeight(node);
+  }
+
+  #getNodeFromValue(value, node = this.root) {
+    if (node === null) return;
+
+    if (value < node.data) return this.#getNodeFromValue(value, node.left);
+    if (value > node.data) return this.#getNodeFromValue(value, node.right);
+
+    return node;
+  }
+
+  #getHeight(node) {
+    if (node === null) return -1;
+
+    const left = this.#getHeight(node.left) + 1;
+    const right = this.#getHeight(node.right) + 1;
+
+    return Math.max(left, right);
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
