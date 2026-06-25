@@ -192,6 +192,17 @@ class Tree {
 
     return Math.max(left, right);
   }
+
+  depth(value, level = 0, node = this.root) {
+    if (node === null) return undefined;
+
+    if (value === node.data) return level;
+
+    if (value < node.data) return this.depth(value, level + 1, node.left);
+    if (value > node.data) return this.depth(value, level + 1, node.right);
+
+    return level;
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
