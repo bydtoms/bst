@@ -229,6 +229,20 @@ class Tree {
       return Math.max(left, right) + 1;
     }
   }
+
+  rebalance() {
+    const treeValues = this.#rebalanceHelper(this.root);
+    const sortedArr = this.#sortArray(treeValues);
+    this.root = this.#buildTree(sortedArr, 0, sortedArr.length - 1);
+  }
+
+  #rebalanceHelper() {
+    const treeValues = [];
+    this.levelOrderForEach((value) => {
+      treeValues.push(value);
+    });
+    return treeValues;
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
