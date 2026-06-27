@@ -8,8 +8,13 @@ class Node {
 
 class Tree {
   constructor(array) {
-    const sortedArr = [...new Set(array.sort((a, b) => a - b))];
+    const sortedArr = this.#sortArray(array);
     this.root = this.#buildTree(sortedArr, 0, sortedArr.length - 1);
+  }
+
+  #sortArray(array) {
+    const sortedArr = [...new Set(array.sort((a, b) => a - b))];
+    return sortedArr;
   }
 
   #buildTree(arr, start, end) {
